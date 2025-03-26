@@ -8,7 +8,7 @@ Este proyecto es una aplicación web construida con **Flask**, **PostgreSQL**, *
 
 - Python 3
 - PostgreSQL
-- HTML + CSS
+- HTML + CSS (vanilla)
 
 ---
 
@@ -33,6 +33,7 @@ CRUD-Audifonos/
 │   └── insertar.html
 ├── static/
 │   └── css/estilos.css
+├── requirements.txt        # Dependencias del proyecto
 └── README.md               # Este archivo
 ```
 
@@ -53,6 +54,11 @@ source venv/bin/activate  # En Linux/Mac
 ```
 
 ### 3. Instalar dependencias
+```bash
+pip install -r requirements.txt
+```
+
+> También puedes instalar manualmente:
 ```bash
 pip install flask psycopg2-binary selenium pandas webdriver-manager
 ```
@@ -111,5 +117,3 @@ Visita en tu navegador: [http://127.0.0.1:5000](http://127.0.0.1:5000)
 - Puedes automatizar el scraping con `cron` si lo deseas.
 
 ---
-
-
