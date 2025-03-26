@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Lista de Audífonos</h1>
+<a href="{{ url_for('insertar') }}">➕ Insertar nuevo producto</a><br><br>
+<a href="{{ url_for('importar_amazon') }}">📦 Importar desde Amazon</a> |
+<a href="{{ url_for('importar_liverpool') }}">🛍️ Importar desde Liverpool</a> |
+<a href="{{ url_for('eliminar_todo') }}" style="color:red;">🗑️ Borrar todos los productos</a><br><br>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Precio</th>
+        <th>Fecha Extracción</th>
+        <th>Tienda</th>
+        <th>URL</th>
+    </tr>
+    {% for producto in productos %}
+    <tr>
+        <td>{{ producto[0] }}</td>
+        <td>{{ producto[1] }}</td>
+        <td>${{ producto[2] }}</td>
+        <td>{{ producto[3] }}</td>
+        <td>{{ producto[5] }}</td>
+        <td><a href="{{ producto[4] }}" target="_blank">Ver Producto</a></td>
+
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
