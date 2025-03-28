@@ -43,7 +43,7 @@ CRUD-Audifonos/
 
 ### 1. Clonar el repositorio (si aplica)
 ```bash
-git clone https://github.com/tu-usuario/CRUD-Audifonos.git
+git clone https://github.com/PHantomIsaack/scrapercrud.git
 cd CRUD-Audifonos
 ```
 
