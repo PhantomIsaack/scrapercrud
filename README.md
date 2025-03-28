@@ -43,7 +43,7 @@ CRUD-Audifonos/
 
 ### 1. Clonar el repositorio (si aplica)
 ```bash
-git clone https://github.com/PHantomIsaack/scrapercrud.git
+git clone https://github.com/PhantomIsaack/scrapercrud.git
 cd CRUD-Audifonos
 ```
 
@@ -79,7 +79,7 @@ CREATE TABLE productos (
 );
 ```
 
-### 5. Configurar credenciales en `app.py`, `amazonh.py`, y `liverpoolh.py`
+### 5. Configurar credenciales en `app.py`, `amazonh.py`, y `liverpool.py`
 ```python
 # Ejemplo:
 conn = psycopg2.connect(
