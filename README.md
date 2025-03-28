@@ -44,7 +44,7 @@ CRUD-Audifonos/
 ### 1. Clonar el repositorio (si aplica)
 ```bash
 git clone https://github.com/PhantomIsaack/scrapercrud.git
-cd CRUD-Audifonos
+cd scrapercrud
 ```
 
 ### 2. Crear entorno virtual
