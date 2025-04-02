@@ -2,11 +2,24 @@
 
 {% block content %}
 <h1>Lista de Audífonos</h1>
-<a href="{{ url_for('insertar') }}">➕ Insertar nuevo producto</a><br><br>
-<a href="{{ url_for('importar_amazon') }}">📦 Importar desde Amazon</a> |
-<a href="{{ url_for('importar_liverpool') }}">🛍️ Importar desde Liverpool</a> |
-<a href="{{ url_for('eliminar_todo') }}" style="color:red;">🗑️ Borrar todos los productos</a><br><br>
+
+<!-- Nuevo formulario de búsqueda -->
+<form action="{{ url_for('buscar') }}" method="POST">
+    <label for="termino_busqueda">Buscar (o crear tabla):</label>
+    <input type="text" id="termino_busqueda" name="termino_busqueda" required>
+    <button type="submit">Buscar / Crear Tabla</button>
+</form>
+
+<hr>
+
+<a href="{{ url_for('insertar') }}"> Insertar nuevo producto</a><br><br>
+<a href="{{ url_for('importar_amazon') }}"> Importar desde Amazon</a> |
+<a href="{{ url_for('importar_liverpool') }}"> Importar desde Liverpool</a> |
+<a href="{{ url_for('eliminar_todo') }}" style="color:red;"> Borrar todos los productos</a>
+<br><br>
+
 <table>
+    <!-- Tu tabla de productos actual -->
     <tr>
         <th>ID</th>
         <th>Título</th>
@@ -23,7 +36,6 @@
         <td>{{ producto[3] }}</td>
         <td>{{ producto[5] }}</td>
         <td><a href="{{ producto[4] }}" target="_blank">Ver Producto</a></td>
-
     </tr>
     {% endfor %}
 </table>
