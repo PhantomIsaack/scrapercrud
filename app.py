@@ -67,6 +67,40 @@ def eliminar_todo():
     conn.close()
     return redirect(url_for('index'))
 
+@app.route('/buscar', methods=['POST'])
+def buscar():
+    termino = request.form['termino_busqueda']
+    
+    # Convertir el término de búsqueda en un nombre de tabla manejable
+    # e.g. "teléfonos" -> "telefonos". Puedes sanitizar más si quieres.
+    nombre_tabla = "productos_" + termino.lower().replace(" ", "_").replace("á", "a") \
+                                                .replace("é", "e").replace("í", "i") \
+                                                .replace("ó", "o").replace("ú", "u") \
+                                                .replace("ñ", "n")
+
+    # Estructura de la tabla idéntica a 'productos'
+    create_table_query = f"""
+    CREATE TABLE IF NOT EXISTS {nombre_tabla} (
+        id SERIAL PRIMARY KEY,
+        titulo VARCHAR(255),
+        precio NUMERIC(10, 2),
+        fecha_extraccion DATE,
+        url TEXT,
+        tienda VARCHAR(50)
+    );
+    """
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute(create_table_query)
+    conn.commit()
+    cur.close()
+    conn.close()
+
+    # Podrías redirigir a la misma página principal, o a otra donde confirmas
+    return redirect(url_for('index'))
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
