@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import psycopg2
 import subprocess
-
+#hkasldjaksdjkashdjkashdkjahsdkaolaolaolaolaolaola
 app = Flask(__name__)
 
 # Conexión a PostgreSQL
