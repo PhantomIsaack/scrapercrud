@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Busqueda de productos</h1>
+
+<form method="POST" action="{{ url_for('buscar') }}">
+    <input type="text" name="busqueda" placeholder="Buscar producto..." required>
+    <button type="submit">🔍 Buscar</button>
+</form>
+
+<h2>Tablas Generadas</h2>
+<table>
+    <tr>
+        <th>Nombre de la Tabla</th>
+        <th>Acciones</th>
+    </tr>
+    {% for tabla in tablas %}
+    <tr>
+        <td>{{ tabla }}</td>
+        <td>
+            <a href="{{ url_for('mostrar_resultados', table_name=tabla) }}">🔍 Ver</a> | 
+            <a href="{{ url_for('eliminar_tabla', table_name=tabla) }}" style="color: red;">🗑️ Eliminar</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
