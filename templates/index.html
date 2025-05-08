@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mb-4">Búsqueda de productos</h1>
+
+<form method="POST" action="{{ url_for('buscar') }}" class="mb-4 d-flex">
+    <input type="text" name="busqueda" class="form-control me-2" placeholder="Buscar producto..." required>
+    <button type="submit" class="btn btn-primary">🔍 Buscar</button>
+</form>
+
+<h2 class="mt-5">Tablas Generadas</h2>
+<table class="table table-bordered table-striped">
+    <thead class="table-light">
+        <tr>
+            <th>Nombre de la Tabla</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for tabla in tablas %}
+        <tr>
+            <td>{{ tabla }}</td>
+            <td>
+                <a href="{{ url_for('mostrar_resultados', table_name=tabla) }}" class="btn btn-outline-secondary btn-sm">🔍 Ver</a>
+                <a href="{{ url_for('estadisticas', table_name=tabla) }}" class="btn btn-outline-info btn-sm">📊 Estadísticas</a>
+                <a href="{{ url_for('eliminar_tabla', table_name=tabla) }}" class="btn btn-outline-danger btn-sm">🗑️ Eliminar</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

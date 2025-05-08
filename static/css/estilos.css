@@ -1,0 +1,33 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1, h2, h3 {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+table {
+    margin-top: 20px;
+}
+
+canvas {
+    margin-bottom: 30px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn-icon {
+    font-size: 1.2rem;
+    margin-right: 5px;
+}
+
+.table td, .table th {
+    vertical-align: middle;
+}
+
+input, select {
+    margin-bottom: 15px;
+}

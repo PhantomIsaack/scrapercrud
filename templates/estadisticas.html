@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mb-4">📊 Estadísticas para la tabla: <strong>{{ table_name }}</strong></h1>
+
+<a href="{{ url_for('mostrar_resultados', table_name=table_name) }}" class="btn btn-outline-primary mb-4">🔙 Volver a resultados</a>
+
+<div class="row g-4">
+    <!-- Resumen general -->
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">📋 Resumen General</div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">🛒 Total de productos: <strong>{{ estadisticas[0] }}</strong></li>
+                    <li class="list-group-item">💰 Precio mínimo: <strong>${{ "%.2f"|format(estadisticas[1]) }}</strong></li>
+                    <li class="list-group-item">💸 Precio máximo: <strong>${{ "%.2f"|format(estadisticas[2]) }}</strong></li>
+                    <li class="list-group-item">📈 Precio promedio: <strong>${{ "%.2f"|format(estadisticas[3]) }}</strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Por tienda -->
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-secondary text-white">🏬 Por Tienda</div>
+            <div class="card-body">
+                <table class="table table-sm table-bordered mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Tienda</th>
+                            <th>Cantidad</th>
+                            <th>Min</th>
+                            <th>Max</th>
+                            <th>Prom.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tienda in por_tienda %}
+                        <tr>
+                            <td>{{ tienda[0] }}</td>
+                            <td>{{ tienda[1] }}</td>
+                            <td>${{ "%.2f"|format(tienda[2]) }}</td>
+                            <td>${{ "%.2f"|format(tienda[3]) }}</td>
+                            <td>${{ "%.2f"|format(tienda[4]) }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Gráficos -->
+<div class="mt-5">
+    <h3>📊 Gráficos de Barras</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <canvas id="graficoCantidad"></canvas>
+        </div>
+        <div class="col-md-6">
+            <canvas id="graficoPrecios"></canvas>
+        </div>
+    </div>
+
+    <h3 class="mt-5">📈 Gráficos en Línea</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <canvas id="graficoCantidadLinea"></canvas>
+        </div>
+        <div class="col-md-6">
+            <canvas id="graficoPreciosLinea"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const tiendas = {{ labels | tojson }};
+    const cantidades = {{ cantidades | tojson }};
+    const precios_promedio = {{ precios_promedio | tojson }};
+
+    // === BARRAS ===
+    new Chart(document.getElementById('graficoCantidad'), {
+        type: 'bar',
+        data: {
+            labels: tiendas,
+            datasets: [{
+                label: 'Cantidad de productos',
+                data: cantidades,
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: { responsive: true, scales: { y: { beginAtZero: true } } }
+    });
+
+    new Chart(document.getElementById('graficoPrecios'), {
+        type: 'bar',
+        data: {
+            labels: tiendas,
+            datasets: [{
+                label: 'Precio promedio ($)',
+                data: precios_promedio,
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: { responsive: true, scales: { y: { beginAtZero: true } } }
+    });
+
+    // === LÍNEAS ===
+    new Chart(document.getElementById('graficoCantidadLinea'), {
+        type: 'line',
+        data: {
+            labels: tiendas,
+            datasets: [{
+                label: 'Cantidad de productos',
+                data: cantidades,
+                fill: false,
+                borderColor: 'rgba(153, 102, 255, 1)',
+                tension: 0.3
+            }]
+        },
+        options: { responsive: true, scales: { y: { beginAtZero: true } } }
+    });
+
+    new Chart(document.getElementById('graficoPreciosLinea'), {
+        type: 'line',
+        data: {
+            labels: tiendas,
+            datasets: [{
+                label: 'Precio promedio ($)',
+                data: precios_promedio,
+                fill: false,
+                borderColor: 'rgba(255, 159, 64, 1)',
+                tension: 0.3
+            }]
+        },
+        options: { responsive: true, scales: { y: { beginAtZero: true } } }
+    });
+</script>
+{% endblock %}

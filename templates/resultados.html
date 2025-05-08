@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Resultados para: <strong>{{ table_name }}</strong></h1>
+
+<div class="mb-4">
+    <a href="{{ url_for('insertar', table_name=table_name) }}" class="btn btn-primary me-2">➕ Insertar nuevo producto</a>
+    <a href="{{ url_for('importar_amazon', table_name=table_name) }}" class="btn btn-warning me-2">📦 Importar desde Amazon</a>
+    <a href="{{ url_for('importar_liverpool', table_name=table_name) }}" class="btn btn-info me-2">🛍️ Importar desde Liverpool</a>
+    <a href="{{ url_for('estadisticas', table_name=table_name) }}" class="btn btn-outline-dark me-2">📊 Ver estadísticas</a>
+    <a href="{{ url_for('eliminar_datos', table_name=table_name) }}" class="btn btn-danger">🗑️ Eliminar todos los datos</a>
+</div>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-light">
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Precio</th>
+            <th>Fecha Extracción</th>
+            <th>Tienda</th>
+            <th>URL</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for producto in productos %}
+        <tr>
+            <td>{{ producto[0] }}</td>
+            <td>{{ producto[1] }}</td>
+            <td>${{ producto[2] }}</td>
+            <td>{{ producto[3] }}</td>
+            <td>{{ producto[5] }}</td>
+            <td><a href="{{ producto[4] }}" target="_blank">Ver producto</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">🔙 Volver</a>
+{% endblock %}

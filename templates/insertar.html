@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Insertar nuevo producto en la tabla: <strong>{{ table_name }}</strong></h2>
+
+<form method="POST" class="mt-4">
+    <div class="mb-3">
+        <label class="form-label">Título:</label>
+        <input type="text" name="titulo" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Precio:</label>
+        <input type="number" step="0.01" name="precio" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Fecha extracción:</label>
+        <input type="date" name="fecha_extraccion" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">URL:</label>
+        <input type="url" name="url" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Tienda:</label>
+        <select name="tienda" class="form-select" required>
+            <option value="Amazon">Amazon</option>
+            <option value="Liverpool">Liverpool</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">💾 Guardar</button>
+    <a href="{{ url_for('mostrar_resultados', table_name=table_name) }}" class="btn btn-secondary ms-2">🔙 Volver</a>
+</form>
+{% endblock %}
